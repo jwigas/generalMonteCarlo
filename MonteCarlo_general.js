@@ -5,7 +5,7 @@ try {
       expr = math.compile(expression)
 
       // evaluate the expression repeatedly for different values of x
-      xValues = math.range(-10, 10.5, 0.5).toArray()
+      xValues = math.range(+document.getElementById('bdyX1').value, +document.getElementById('bdyX2').value +0.1,0.1).toArray()
       yValues = xValues.map(function (x) {
         return expr.evaluate({x: x})
       })
@@ -66,8 +66,11 @@ try {
 
       //Printed in html
       document.getElementById("Values2")
-        .innerHTML= "counted: " + result[0].length + " total samples: " + numOfSamples + " Ratio: " + ratio + "</br>"
-                    +"The total area of the function from "+xMin+" To "+xMax+" is : " + AreaOfMonteCarlo(xMin,xMax,yMin,yMax,ratio) + "</br>";
+        .innerHTML=  "counted: " + result[0].length + " total samples: " + numOfSamples + " Ratio: " + ratio.toFixed(3) + "</br>"
+                    +"The total area of "+"$ f(x)="+ math.parse(expression).toTex({parenthesis: 'keep'}) + "$ "
+                    + " from "+xMin.toFixed(0)+" to "+xMax.toFixed(0)+" is : <strong>" + AreaOfMonteCarlo(xMin,xMax,yMin,yMax,ratio).toFixed(3) + "</strong></br>"
+                    ;
+  
 
       // End of Monte Carlo Method
       // render the plot using plotly
@@ -106,13 +109,12 @@ try {
       }
 
       const data = [trace1, resultUnderFunction,resultOutsideFunction]
-      
       var layout = {
         showlegend: true,
         legend: {
           orientation: 'h'
         },
-        margin:{l:20, r:20, t:20, b:20},
+        margin:{l:50, r:10, t:20, b:10},
       };
 
       var config = {responsive: true}
@@ -128,6 +130,8 @@ try {
 document.getElementById('form').onsubmit = function (event) {
   event.preventDefault()
   draw()
+  var HUB = MathJax.Hub;
+  HUB.Queue(["Typeset", HUB, "Values2"]);
 }
 
 draw()

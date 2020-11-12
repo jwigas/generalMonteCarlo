@@ -5,6 +5,17 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script src="https://unpkg.com/mathjs@8.0.0/lib/browser/math.js"></script>
 <script src="https://cdn.plot.ly/plotly-1.35.2.min.js"></script>
+
+<!-- Inline equation workaround-->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true
+      }
+    });
+  </script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML.js"></script>
 
 <style>
@@ -15,24 +26,32 @@ body,h1,h2,h3,h4,h5,h6
 <body>
     <!-- Top menu -->
     <div class="w3-top">
-        <div class="w3-white w3-xlarge" style="max-width: width auto">
-        <div class="w3-center">Monte Carlo Method to Determine Area Under a Function</div>
+        <div class="w3-white w3-xlarge" style="max-width: width auto;margin:auto">
+        <div class="w3-center">The Application of Monte Carlo Method to Determine Area Under a Function</div>
         </div>
     </div>
 
     <!-- !PAGE CONTENT! -->
     <div class="w3-row-padding w3-padding-64 w3-center">
         <form id="form">
-            <label for="eq">Enter an equation:</label>
-            <input type="text" size = "22" id="eq" value="4 * sin(x/2) + 8 * cos(x)" /><br><br>
-            <label for="eq">Insert Random Numbers :</label>
+            <div class="w3-padding-16">
+                <label for="eq">Enter an equation:</label>
+                <input type="text" size = "22" id="eq" value="2*sin (x) + sin (pi*x)" />
+            </div>
+            <label for="bndry">With X boundary from </label>
+            <input type="text" size = "2" id="bdyX1" value="-10" />
+            <label for="bndry">to </label>
+            <input type="text" size = "2" id="bdyX2" value="10" /><br><br>
+            <label for="smples">Insert Random Numbers :</label>
             <input type="text" size = "4" id="smpls" value="3000" />
+
             <input type="submit" value="Draw" />
         </form>
 
         <div id="Values2" style="margin-top: 2%;"></div>
+
     
-        <div id="plot"></div>
+        <div id="plot" style="margin-top: 2%;margin-left: 2%;margin-right: 2%;"></div>
     </div>
 
  <!-- Footer -->
